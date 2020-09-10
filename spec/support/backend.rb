@@ -2,6 +2,8 @@ module Backend
   def self.from_name(name)
     puts "Backend: #{name}"
     case name
+    when 'dynamoid'
+      DynamoidBackend.new
     when 'mongoid'
       MongoidBackend.new
     else
@@ -49,6 +51,24 @@ module Backend
     def setup_database_cleaner
       DatabaseCleaner.allow_remote_database_url = true
       DatabaseCleaner[:mongoid].strategy = :truncation
+    end
+
+    def migrate!
+      # Not necessary
+    end
+  end
+  
+  class DynamoidBackend
+    def load!
+      require 'dynamoid'
+      #require 'devise/orm/dynamoid'
+      require 'rails_app_dynamoid/config/environment'
+      require 'database_cleaner'
+    end
+
+    def setup_database_cleaner
+      DatabaseCleaner.allow_remote_database_url = true
+      DatabaseCleaner[:dynamoid].strategy = :truncation
     end
 
     def migrate!
