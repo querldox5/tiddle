@@ -17,6 +17,7 @@ gemfile:
   - gemfiles/rails5.2.gemfile
   - gemfiles/rails6.0.gemfile
 env:
+  - BACKEND=dynamoid
   - BACKEND=mongoid
   - BACKEND=active_record
 jobs:
