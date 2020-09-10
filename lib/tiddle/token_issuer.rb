@@ -51,7 +51,7 @@ module Tiddle
         resource.association(:authentication_tokens).klass
       elsif resource.respond_to?(:relations) # Mongoid
         resource.relations['authentication_tokens'].klass
-      elsif resource.respond_to?(::associations) # Dynamoid
+      elsif resource.respond_to?(:associations) # Dynamoid
         resource..associations[:authentication_tokens]
       else
         raise 'Cannot determine authentication token class, unsupported ORM/ODM?'
